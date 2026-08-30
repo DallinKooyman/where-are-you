@@ -16,24 +16,6 @@ Mapbox.setTelemetryEnabled(false);
 export default function Map() {
   const [location, setLocation] = useState<Location | null>(null);
 
-  // const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-  // useEffect(() => {
-  //   async function getCurrentLocation() {
-
-  //     let { status } = await Location.requestBackgroundPermissionsAsync();
-  //     if (status !== 'granted') {
-  //       setErrorMsg('Permission to access location was denied');
-  //       return;
-  //     }
-
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLocation(location);
-  //   }
-
-  //   getCurrentLocation();
-  // }, []);
-
   return (
     <MapView
       style={styles.map}
@@ -47,7 +29,7 @@ export default function Map() {
         minDisplacement={10}
       />
       <Camera
-        centerCoordinate={[location?.coords.longitude ?? 0, location?.coords.latitude ?? 0]}
+        followUserLocation={true}
         zoomLevel={14}
         animationMode='moveTo'
       />
