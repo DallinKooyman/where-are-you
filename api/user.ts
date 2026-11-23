@@ -22,13 +22,16 @@ export const getUsers = async (): Promise<User[]> => {
   return data.users;
 }
 
-export const createUser = async (user: User): Promise<User[]> => {
+export const createUser = async (name: string, password: string): Promise<User> => {
   const response = await fetch(userRoute, {
     method: 'POST',
-    body: JSON.stringify(user)
+    body: JSON.stringify({ name, password })
   })
   const data = await response.json();
-  return data.user;
+  if (response.status === 200) {
+    return data.user;
+  }
+  throw Error(data);
 }
 
 export const getUserById = async (user: User): Promise<User> => {
@@ -53,4 +56,16 @@ export const deleteUser = async (user: User): Promise<boolean> => {
     method: 'DELETE',
   })
   return await response.ok;
+}
+
+export const login = async (name: string, password: string): Promise<User> => {
+  const response = await fetch(userRoute + `/login`, {
+    method: 'POST',
+    body: JSON.stringify({ name, password })
+  })
+  const data = await response.json();
+  if (response.status === 200) {
+    return data.user;
+  }
+  throw Error(data);
 }
