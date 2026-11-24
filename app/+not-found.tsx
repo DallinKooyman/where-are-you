@@ -1,3 +1,7 @@
+// Copyright (c) 2026 Dallin Kooyman
+// SPDX-License-Identifier: GPL-3.0-only
+// See LICENSE in the project root for license information.
+
 import { View, StyleSheet } from 'react-native';
 import { Link, Stack } from 'expo-router';
 

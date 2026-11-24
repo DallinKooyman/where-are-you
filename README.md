@@ -1,16 +1,31 @@
-# Welcome to your Expo app 👋
+# Where are You? 📍
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Where Are You is a free, self-hosted service to share your location with friends and family and ONLY friends and family. This is an alternative to other location sharing services and works on your own home server. Where Are You keeps your location on your own hardware and shares your location to those with access to your server, on any mobile device, without needing to share your location with a 3rd party. 
 
-## Get started
+## Overview
 
-1. Install dependencies
+Where Are You is a React Native app built using Expo. It runs on iOS and Andriod and can be installed via the Expo app. The map uses [MapBox](https://www.mapbox.com/) and you must get a personal MapBox API token in order to render the maps(set  `EXPO_PUBLIC_MAPBOX_TOKEN` equal to your token in `.env` then build the project). The app will get your location from your phone and display a dot at your location.
+
+This project is the front end. It communicates with the [Where Are You server](https://github.com/DallinKooyman/where-are-you-server) via API calls and websockets (Features may still not be added yet).
+
+This project is still a work in progress. Features have yet to be tested. This repo and ReadMe will be updated when it is ready for use
+
+## Development 
+### Expo
+This project is developed with Expo. You will need your own Expo account to start building
+
+### Install and Run
+
+1. Clone the repository
+gh repo clone DallinKooyman/where-are-you
+
+2. Install dependencies (see package.json)
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start the app
 
    ```bash
    npx expo start
@@ -25,26 +40,3 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

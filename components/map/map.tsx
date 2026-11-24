@@ -1,3 +1,7 @@
+// Copyright (c) 2026 Dallin Kooyman
+// SPDX-License-Identifier: GPL-3.0-only
+// See LICENSE in the project root for license information.
+
 import Mapbox, { Camera, LocationPuck, MapView, UserLocation, type Location } from '@rnmapbox/maps';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
