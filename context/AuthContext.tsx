@@ -31,7 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         if (isActive) {
           setUser(restoredUser);
-          setStatus(restoredUser ? "signedIn" : "signedOut")
+          setStatus(restoredUser ? "signedIn" : "signedOut");
         }
       }
       catch (err) {
@@ -47,8 +47,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return () => {
       isActive = false;
-    }
-  })
+    };
+  });
 
   const signIn = useCallback(async (email: string, password?: string): Promise<boolean> => {
     try {

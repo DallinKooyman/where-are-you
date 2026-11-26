@@ -7,4 +7,4 @@ import { getRequest } from "./apiClient";
 export const canReachServer = async (serverAddress: string): Promise<boolean> => {
   const response = await getRequest('/status');
   return response.ok;
-}
+};

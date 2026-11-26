@@ -23,7 +23,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       if (await canReachServer(address)) {
         setServerAddress(address);
         setConnected(true);
-        settingsStore.setState({ serverAddress })
+        settingsStore.setState({ serverAddress });
         return true;
       }
       else {
@@ -35,17 +35,17 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       // Future implementations should have a previously connected list to revert back to.
       setServerAddress(undefined);
       setConnected(false);
-      console.error(err)
+      console.error(err);
       return false;
     }
-  }, [])
+  }, []);
 
 
   return (
     <SettingsContext.Provider value={{ serverAddress, connected, updateServerAddress }}>
       {children}
     </SettingsContext.Provider>
-  )
+  );
 }
 
 export function useSettingsContext(): SettingsContextValue {

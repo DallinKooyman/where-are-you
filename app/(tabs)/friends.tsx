@@ -9,7 +9,7 @@ export default function Friends() {
     <View>
       <Text style={styles.text}>Under Development</Text>
     </View >
-  )
+  );
 }
 
 const styles = StyleSheet.create({

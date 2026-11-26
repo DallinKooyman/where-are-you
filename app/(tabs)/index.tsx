@@ -3,7 +3,7 @@
 // See LICENSE in the project root for license information.
 
 import { StyleSheet, View } from 'react-native';
-import Map from '../../components/map/map'
+import Map from '../../components/map/map';
 
 
 export default function MapScreen() {

@@ -8,27 +8,27 @@ import { settingsStore } from "@/context/settingsStore";
 export function getRequest(path: string): Promise<Response> {
   return apiRequest(path, {
     method: 'GET',
-  })
+  });
 }
 
 export function postRequest(path: string, body: any): Promise<Response> {
   return apiRequest(path, {
     method: 'POST',
     body: JSON.stringify(body)
-  })
+  });
 }
 
 export function putRequest(path: string, body: any): Promise<Response> {
   return apiRequest(path, {
     method: 'PUT',
     body: JSON.stringify(body)
-  })
+  });
 }
 
 export function deleteRequest(path: string): Promise<Response> {
   return apiRequest(path, {
     method: 'DELETE',
-  })
+  });
 }
 
 // Generic call to server. This includes the server address as to not repeat the call in multiple files
