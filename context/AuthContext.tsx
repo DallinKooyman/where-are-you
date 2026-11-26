@@ -11,8 +11,8 @@ type AuthStatus = "loading" | "signedOut" | "signedIn";
 interface AuthContextValue {
   user: User | undefined;
   status: AuthStatus;
-  signIn: (email: string, password: string) => Promise<boolean>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password?: string) => Promise<boolean>;
+  signUp: (email: string, password?: string) => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -27,7 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     async function restoreSession() {
       try {
-        const restoredUser = new User('123', "test");
+        const restoredUser = new User('123', "test"); //TODO: Update later with session stored one device
 
         if (isActive) {
           setUser(restoredUser);
@@ -50,7 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   })
 
-  const signIn = useCallback(async (email: string, password: string): Promise<boolean> => {
+  const signIn = useCallback(async (email: string, password?: string): Promise<boolean> => {
     try {
       const signedInUser = await login(email, password);
       setUser(signedInUser);
@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const signUp = useCallback(async (name: string, password: string) => {
+  const signUp = useCallback(async (name: string, password?: string) => {
     try {
       const newUser = await createUser(name, password);
       setUser(newUser);

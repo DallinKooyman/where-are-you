@@ -6,23 +6,23 @@ import { Pressable, StyleSheet, Text, TextInput } from 'react-native';
 import { useState } from 'react';
 import { SafeAreaFrameContext, SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useAuthContext } from '@/context/AuthContext';
+import { router } from 'expo-router';
 
 export default function Login() {
   const [name, onNameChange] = useState('');
-  const [password, onPasswordChange] = useState('');
+  const [password, onPasswordChange] = useState<string | undefined>(); //Passwords are optional
   const [submitted, setSubmitted] = useState(false);
   const [failedSignIn, setFailedSignIn] = useState(false);
 
   const nameMissing = submitted && name.trim() === '';
-  const passwordMissing = submitted && password.trim() === '';
 
   const { signIn } = useAuthContext();
 
   function handleLogin() {
     setSubmitted(true);
 
-    if (name.trim() === "" || password.trim() === "") {
-      return; // Keep the user on the form until both fields are filled.
+    if (nameMissing) {
+      return; // Keep the user on the form until a name is filled
     }
 
     if (!signIn(name, password)) {
@@ -45,15 +45,12 @@ export default function Login() {
           )}
 
           <TextInput
-            style={[styles.input, passwordMissing && styles.inputError]}
+            style={styles.input}
             secureTextEntry={true}
             onChangeText={onPasswordChange}
             value={password}
             placeholder="Password"
           />
-          {passwordMissing && (
-            <Text style={styles.errorText}>Password is required.</Text>
-          )}
 
           {failedSignIn && (
             < Text style={styles.errorText}>Username or password is incorrect.</Text>
@@ -68,6 +65,17 @@ export default function Login() {
             ]}
           >
             <Text style={styles.buttonText}>Log in</Text>
+          </Pressable>
+
+          <Pressable
+            style={({ pressed }) => [
+              styles.button,
+              pressed && styles.buttonPressed,
+            ]}
+          >
+            <Text onPress={() => router.navigate('./register')}>
+              Create a user
+            </Text>
           </Pressable>
         </SafeAreaView>
       </SafeAreaFrameContext>

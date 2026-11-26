@@ -26,7 +26,7 @@ export const getUsers = async (): Promise<User[]> => {
   return data.users;
 }
 
-export const createUser = async (name: string, password: string): Promise<User> => {
+export const createUser = async (name: string, password?: string): Promise<User> => {
   const response = await fetch(userRoute, {
     method: 'POST',
     body: JSON.stringify({ name, password })
@@ -62,7 +62,7 @@ export const deleteUser = async (user: User): Promise<boolean> => {
   return await response.ok;
 }
 
-export const login = async (name: string, password: string): Promise<User> => {
+export const login = async (name: string, password?: string): Promise<User> => {
   const response = await fetch(userRoute + `/login`, {
     method: 'POST',
     body: JSON.stringify({ name, password })
