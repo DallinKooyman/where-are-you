@@ -3,34 +3,18 @@
 // See LICENSE in the project root for license information.
 
 import { User } from "@/models/user"
+import { deleteRequest, getRequest, postRequest, putRequest } from "./apiClient";
 
-const host = process.env.EXPO_PUBLIC_HOST_SERVER_ADDRESS;
-
-console.log(process.env)
-console.log(process.env.EXPO_PUBLIC_HOST_SERVER_ADDRESS)
-console.log(host)
-
-if (host === undefined || !host) {
-  throw new Error(
-    'Missing EXPO_PUBLIC_HOST_SERVER_ADDRESS. Check your .env.local file.'
-  );
-}
-
-const userRoute = host + '/users';
+const userRoute = '/users';
 
 export const getUsers = async (): Promise<User[]> => {
-  const response = await fetch(userRoute, {
-    method: 'GET',
-  })
+  const response = await getRequest(userRoute)
   const data = await response.json();
   return data.users;
 }
 
 export const createUser = async (name: string, password?: string): Promise<User> => {
-  const response = await fetch(userRoute, {
-    method: 'POST',
-    body: JSON.stringify({ name, password })
-  })
+  const response = await postRequest(userRoute, { name, password });
   const data = await response.json();
   if (response.status === 200) {
     return data.user;
@@ -39,34 +23,24 @@ export const createUser = async (name: string, password?: string): Promise<User>
 }
 
 export const getUserById = async (user: User): Promise<User> => {
-  const response = await fetch(userRoute + `/${user.id}`, {
-    method: 'GET',
-  })
+  const response = await getRequest(userRoute + `/${user.id}`)
   const data = await response.json();
   return data.user;
 }
 
 export const updateUser = async (user: User): Promise<User> => {
-  const response = await fetch(userRoute + `/${user.id}`, {
-    method: 'PUT',
-    body: JSON.stringify(user)
-  })
+  const response = await putRequest(userRoute + `/${user.id}`, user);
   const data = await response.json();
   return data.user;
 }
 
 export const deleteUser = async (user: User): Promise<boolean> => {
-  const response = await fetch(userRoute + `/${user.id}`, {
-    method: 'DELETE',
-  })
+  const response = await deleteRequest(userRoute + `/${user.id}`);
   return await response.ok;
 }
 
 export const login = async (name: string, password?: string): Promise<User> => {
-  const response = await fetch(userRoute + `/login`, {
-    method: 'POST',
-    body: JSON.stringify({ name, password })
-  })
+  const response = await postRequest(userRoute + `/login`, { name, password });
   const data = await response.json();
   if (response.status === 200) {
     return data.user;
