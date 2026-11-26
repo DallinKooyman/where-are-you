@@ -28,6 +28,7 @@ export default function RootLayout() {
 
 function RootNavigator() {
   const { user, status } = useAuthContext();
+  const { connected } = useSettingsContext();
 
   // Render a loading view here while the saved session is being checked.
   if (status) {
@@ -36,11 +37,16 @@ function RootNavigator() {
 
   return (
     <Stack>
-      <Stack.Protected guard={!user}> {/*Protected Stacks force a user to be logged in (based on condition) */}
+      {/*Protected Stacks force the guard to be checked and be true) */}
+      <Stack.Protected guard={!connected}>
+        <Stack.Screen name="server" options={{ headerShown: false }} />
+      </Stack.Protected>
+
+      <Stack.Protected guard={!!connected && !user}>
         <Stack.Screen name="login" options={{ headerShown: false }} />
       </Stack.Protected>
 
-      <Stack.Protected guard={!!user}>
+      <Stack.Protected guard={!!connected && !!user}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack.Protected>
 
@@ -48,3 +54,7 @@ function RootNavigator() {
     </Stack>
   );
 }
+function useSettingsContext(): { connected: any; } {
+  throw new Error('Function not implemented.');
+}
+

@@ -4,3 +4,6 @@ Add User Capabilites
 - pass user around
 
 Complete the friendship call and add the friendship list to maps.tsx
+
+Create a list of "Previously Connected Servers" to allow uses to revert back to a previously working server
+ if the new server address is not working
